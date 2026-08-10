@@ -119,7 +119,7 @@ in \getpersonbirthplace{john-doe}.
 
 ## Examples and tests
 
-The `examples/` directory contains:
+The `examples/` directory is included in the CTAN archive and contains:
 
 - `getting-started.tex` — introductory example with all major
   features
@@ -128,8 +128,9 @@ The `examples/` directory contains:
   from each
 - `stuart-register.tex` — four-generation Stuart dynasty register
 
-The `testfiles/` directory contains `l3build` regression tests
-covering each feature area.
+The repository-only `testfiles/` directory contains `l3build` regression
+tests covering each feature area. It is intentionally excluded from the
+CTAN archive.
 
 ## License
 

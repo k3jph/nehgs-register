@@ -37,7 +37,10 @@ These files are generated from the source files.
 * `examples/multi-marriage.tex`
 * `examples/getting-started.tex`
 
-## Test files
+## Test files (repository only)
+
+These files support development and are intentionally excluded from the
+CTAN archive.
 
 * `testfiles/basic.lvt`
 * `testfiles/basic.tlg`

@@ -53,3 +53,56 @@ jobs:
 
       - name: Build documentation
         run: l3build doc
+
+      - name: Build CTAN archive
+        run: l3build ctan
+
+      - name: Verify CTAN archive contents
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          archive="$(find . -maxdepth 1 -type f -name 'nehgs-register-*.zip' ! -name '*.tds.zip' -print -quit)"
+          if [[ -z "$archive" ]]; then
+            echo "CTAN archive was not produced" >&2
+            exit 1
+          fi
+
+          mapfile -t entries < <(unzip -Z1 "$archive")
+          for example in \
+            getting-started.tex \
+            minimal-register.tex \
+            multi-marriage.tex \
+            stuart-register.tex
+          do
+            expected="nehgs-register/examples/$example"
+            if [[ ! " ${entries[*]} " =~ " $expected " ]]; then
+              echo "Missing CTAN example: $expected" >&2
+              exit 1
+            fi
+          done
+
+          for test_path in testfiles/*; do
+            test_name="${test_path##*/}"
+            for entry in "${entries[@]}"; do
+              if [[ "$entry" == *"/testfiles/"* || "$entry" == "nehgs-register/$test_name" ]]; then
+                echo "Regression test leaked into CTAN archive: $entry" >&2
+                exit 1
+              fi
+            done
+          done
+
+          tds_archive="$(mktemp)"
+          trap 'rm -f "$tds_archive"' EXIT
+          unzip -p "$archive" nehgs-register.tds.zip > "$tds_archive"
+          mapfile -t tds_entries < <(unzip -Z1 "$tds_archive")
+
+          for test_path in testfiles/*; do
+            test_name="${test_path##*/}"
+            for entry in "${tds_entries[@]}"; do
+              if [[ "$entry" == *"/testfiles/"* || "$entry" == */"$test_name" ]]; then
+                echo "Regression test leaked into TDS archive: $entry" >&2
+                exit 1
+              fi
+            done
+          done

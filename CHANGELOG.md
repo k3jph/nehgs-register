@@ -7,6 +7,40 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.1] - 2026-08-10
+
+### Added
+- The four example documents are now included in the CTAN archive under
+  `examples/`.
+
+### Changed
+- Release metadata and package documentation updated for version 1.1.
+
+## [1.0.2] - 2026-07-29
+
+### Changed
+- Renamed package from `registerstyle` to `nehgs-register` per CTAN
+  reviewer feedback (avoids confusion with TeX register terminology).
+- All source files, internal LaTeX3 module names, and metadata updated
+  to reflect the new name.
+- GitHub repository URLs updated to `k3jph/nehgs-register`.
+
+### Removed
+- Duplicate `testfiles/stuart-four-generations.tex` (identical to
+  `examples/stuart-register.tex`).
+
+## [1.0.1] - 2026-07-29
+
+### Fixed
+- CI compatibility with TeX Live 2026: added missing TeX Live packages
+  (`tools`, `l3packages`, `hypdoc`, `ec`, `makeindex`).
+- Test files updated to standard l3build pattern (`\begin{document}`
+  before `\START`, `\OMIT` before `\end{document}`).
+- Removed conflicting root-level `registerstyle.ins` (canonical copy
+  lives in `source/`).
+- Upgraded `install-texlive` action to v4 for Node 24 support and
+  CTAN mirror fallback.
+
 ## [1.0] - 2026-07-27
 
 First public release.
