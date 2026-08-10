@@ -7,6 +7,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.1] - 2026-08-10
+
+### Added
+- The four example documents are now included in the CTAN archive under
+  `examples/`.
+
+### Changed
+- Release metadata and package documentation updated for version 1.1.
+
 ## [1.0.2] - 2026-07-29
 
 ### Changed
